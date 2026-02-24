@@ -1,0 +1,21 @@
+# Arduino IDE generated files
+*.hex
+*.elf
+*.bin
+*.map
+*.d
+*.o
+
+# Build folder (Arduino IDE 2.0+)
+build/
+
+# ESP32 specific
+sdkconfig
+*.part.bin
+
+# Mac/Windows system files
+.DS_Store
+Thumbs.db
+
+# Private configuration (Highly recommended to move wifi pass here)
+secrets.h

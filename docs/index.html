@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Swiss Transit Tracker is an ESP32 public-transport departure board with configurable OpenData API modes, custom filters, RAM-aware JSON parsing, and watchdog recovery."
+    />
+    <title>Swiss Transit Tracker</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <a class="brand" href="#overview" aria-label="Swiss Transit Tracker home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 44" focusable="false">
+            <path d="M8 22 24 8v9h16v10H24v9L8 22Z" />
+            <path d="M56 22 40 8v9H24v10h16v9l16-14Z" />
+          </svg>
+        </span>
+        <span>Swiss Transit Tracker</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#features">Features</a>
+        <a href="#data">Data</a>
+        <a href="#reliability">Reliability</a>
+        <a href="#hardware">Hardware</a>
+        <a class="nav-cta" href="https://github.com/HerRei/Sbb_Tracker_Sissach" rel="noreferrer">GitHub</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section id="overview" class="hero section-pad">
+        <div class="hero-copy">
+          <p class="eyebrow">ESP32 • Swiss public transport API • ST7789</p>
+          <h1>Swiss Transit Tracker</h1>
+          <p class="hero-lede">
+            A configurable departure board for Swiss public transport. Pick a station or stop, choose API modes like train, tram,
+            bus, ship, or cableway, then prioritize the lines and destinations you actually care about.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://github.com/HerRei/Sbb_Tracker_Sissach" rel="noreferrer">
+              <span class="button-icon" aria-hidden="true">↗</span>
+              View on GitHub
+            </a>
+            <a class="button button-secondary" href="#features">Explore features</a>
+          </div>
+          <dl class="hero-stats" aria-label="Project highlights">
+            <div>
+              <dt>4</dt>
+              <dd>rows shown</dd>
+            </div>
+            <div>
+              <dt>60s</dt>
+              <dd>refresh cycle</dd>
+            </div>
+            <div>
+              <dt>120s</dt>
+              <dd>watchdog</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="hero-model" aria-label="Interactive 3D model of the Swiss Transit Tracker board">
+          <div id="board-viewer" class="board-viewer">
+            <canvas id="board-canvas" aria-label="Rotating 3D ESP32 departure board"></canvas>
+            <div class="viewer-fallback" role="img" aria-label="Static rendered Swiss Transit Tracker board">
+              <div class="fallback-board">
+                <div class="fallback-pin-row"></div>
+                <div class="fallback-screen">
+                  <div><span>12:34 <b>IR27</b></span><strong>On time</strong></div>
+                  <div><span>13:02 <b>B50</b></span><strong>On time</strong></div>
+                  <div><span>13:17 <b>T8</b></span><em>+1 min</em></div>
+                  <div><span>14:03 <b>S3</b></span><strong>On time</strong></div>
+                </div>
+              </div>
+            </div>
+            <svg class="callout-lines" viewBox="0 0 1000 650" aria-hidden="true">
+              <path d="M248 170 C310 160 360 180 421 235" />
+              <path d="M238 395 C325 378 368 363 438 341" />
+              <path d="M756 155 C708 170 666 196 611 249" />
+              <path d="M789 402 C710 388 662 372 587 346" />
+              <path d="M500 92 C505 147 506 172 506 219" />
+              <path d="M504 575 C506 523 508 477 508 412" />
+            </svg>
+            <div class="model-callout callout-esp32">
+              <span>ESP32 board</span>
+              <small>Wi‑Fi connected microcontroller</small>
+            </div>
+            <div class="model-callout callout-usb">
+              <span>USB-C power</span>
+              <small>5V input for simple mounting</small>
+            </div>
+            <div class="model-callout callout-display">
+              <span>ST7789 display</span>
+              <small>Color rows for any selected mode</small>
+            </div>
+            <div class="model-callout callout-ui">
+              <span>Departure UI</span>
+              <small>Four sorted public-transport departures</small>
+            </div>
+            <div class="model-callout callout-watchdog">
+              <span>Watchdog</span>
+              <small>120s hang protection</small>
+            </div>
+            <div class="model-callout callout-json">
+              <span>JSON pipeline</span>
+              <small>Filtered fields and user rules</small>
+            </div>
+            <p class="viewer-hint">Drag to rotate • Scroll to zoom</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="section-pad feature-band">
+        <div class="section-heading">
+          <p class="eyebrow">What it does</p>
+          <h2>A compact board built for reliable glanceable departures.</h2>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon departure-icon" aria-hidden="true"></div>
+            <h3>Real-time departures</h3>
+            <p>Select a Swiss stop and request trains, trams, buses, ships, cableways, or any combination supported by the API.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon status-icon" aria-hidden="true"></div>
+            <h3>Delay state at a glance</h3>
+            <p>Green blocks mark departures that are on time. Red blocks show delays above one minute, capped at two digits.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon target-icon" aria-hidden="true"></div>
+            <h3>Custom route filters</h3>
+            <p>Prioritize destination text and exact line labels, or hide non-matching departures for a focused board.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon dim-icon" aria-hidden="true"></div>
+            <h3>Night brightness</h3>
+            <p>Uses the HTTP date header to dim the ST7789 backlight late at night and restore normal brightness during the day.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="data" class="section-pad split-section">
+        <div class="section-copy">
+          <p class="eyebrow">Data pipeline</p>
+          <h2>Modes and filters are chosen before the display logic runs.</h2>
+          <p>
+            The sketch asks the transport API for up to eight departures using your selected transport modes. ArduinoJson keeps
+            only the fields the UI and custom filters need, reducing parse pressure on the ESP32.
+          </p>
+        </div>
+        <div class="pipeline" aria-label="Live data pipeline">
+          <div class="pipeline-node">
+            <span>01</span>
+            <strong>Wi‑Fi</strong>
+            <small>Reconnect tries before failing cleanly</small>
+          </div>
+          <div class="pipeline-arrow" aria-hidden="true"></div>
+          <div class="pipeline-node">
+            <span>02</span>
+            <strong>Selected modes</strong>
+            <small><code>transportations[]=bus</code></small>
+          </div>
+          <div class="pipeline-arrow" aria-hidden="true"></div>
+          <div class="pipeline-node">
+            <span>03</span>
+            <strong>User filters</strong>
+            <small>Destination and line rules</small>
+          </div>
+          <div class="pipeline-arrow" aria-hidden="true"></div>
+          <div class="pipeline-node">
+            <span>04</span>
+            <strong>Sorted display</strong>
+            <small>Best four matches shown</small>
+          </div>
+        </div>
+        <div class="code-panel">
+          <div class="panel-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <pre><code>const char* TRANSPORTATION_TYPES[] = {"train", "bus"};
+const char* DESTINATION_FILTERS[] = {"basel", "laufen"};
+const char* LINE_FILTERS[] = {"S3", "B50"};
+const bool ONLY_SHOW_FILTER_MATCHES = false;
+
+filter["stationboard"][0]["to"] = true;
+filter["stationboard"][0]["category"] = true;
+filter["stationboard"][0]["number"] = true;
+filter["stationboard"][0]["stop"]["departure"] = true;
+filter["stationboard"][0]["stop"]["delay"] = true;</code></pre>
+        </div>
+      </section>
+
+      <section class="section-pad memory-section" aria-labelledby="memory-title">
+        <div class="section-heading">
+          <p class="eyebrow">RAM discipline</p>
+          <h2 id="memory-title">Static buffers, bounded rows, predictable work.</h2>
+        </div>
+        <div class="memory-grid">
+          <article>
+            <span class="memory-value">9216</span>
+            <h3>JSON document bytes</h3>
+            <p><code>StaticJsonDocument&lt;9216&gt;</code> holds the filtered stationboard data after parsing.</p>
+          </article>
+          <article>
+            <span class="memory-value">512</span>
+            <h3>Filter bytes</h3>
+            <p><code>StaticJsonDocument&lt;512&gt;</code> stores the ArduinoJson filter schema.</p>
+          </article>
+          <article>
+            <span class="memory-value">12288</span>
+            <h3>Payload reserve</h3>
+            <p>The response string reserves room up front to reduce repeated heap growth.</p>
+          </article>
+          <article>
+            <span class="memory-value">8→4</span>
+            <h3>Bounded display work</h3>
+            <p>Temporary arrays inspect up to eight API rows, then render the best four matching rows.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="reliability" class="section-pad reliability-section">
+        <div class="section-copy">
+          <p class="eyebrow">Reliability</p>
+          <h2>The watchdog turns bad network states into visible recovery.</h2>
+          <p>
+            The board resets the task watchdog around long network and parse steps. If Wi‑Fi, HTTP, or JSON handling fails, the
+            display shows the reason briefly before the ESP32 restarts into a clean state.
+          </p>
+        </div>
+        <div class="watchdog-flow">
+          <div class="watchdog-card">
+            <span>1</span>
+            <strong>Feed WDT</strong>
+            <small><code>esp_task_wdt_reset()</code> before and after blocking work.</small>
+          </div>
+          <div class="watchdog-card">
+            <span>2</span>
+            <strong>Classify failure</strong>
+            <small><code>wifi</code>, <code>http</code>, <code>json_nomemory</code>, or body validation errors.</small>
+          </div>
+          <div class="watchdog-card critical">
+            <span>3</span>
+            <strong>Show reset reason</strong>
+            <small>The ST7789 prints <code>RESET:</code> with the failure message.</small>
+          </div>
+          <div class="watchdog-card">
+            <span>4</span>
+            <strong>Restart cleanly</strong>
+            <small><code>ESP.restart()</code> recovers from a stuck or corrupted runtime state.</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-pad gallery-section" aria-labelledby="photos-title">
+        <div class="section-heading">
+          <p class="eyebrow">Build shots</p>
+          <h2 id="photos-title">Small enough for quick mounting, bright enough to read across the room.</h2>
+        </div>
+        <div class="photo-grid">
+          <figure>
+            <img src="./assets/board-closeup.svg" alt="Close-up view of the Swiss Transit Tracker board showing departures on the display" />
+            <figcaption>Close-up display view with times, line labels, and compact delay bars.</figcaption>
+          </figure>
+          <figure>
+            <img src="./assets/board-installed.svg" alt="Swiss Transit Tracker board mounted on a red board with a bright green departure display" />
+            <figcaption>Installed view with the display readable in a real room setup.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="hardware" class="section-pad hardware-section">
+        <div class="section-heading">
+          <p class="eyebrow">Build details</p>
+          <h2>Hardware, libraries, and setup steps.</h2>
+        </div>
+        <div class="hardware-layout">
+          <div class="pinout">
+            <h3>Display pinout</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>ST7789 pin</th>
+                  <th>ESP32 pin</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>MOSI</td><td>GPIO 6</td></tr>
+                <tr><td>SCLK</td><td>GPIO 7</td></tr>
+                <tr><td>CS</td><td>GPIO 14</td></tr>
+                <tr><td>DC</td><td>GPIO 15</td></tr>
+                <tr><td>RST</td><td>GPIO 21</td></tr>
+                <tr><td>BL</td><td>GPIO 22</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="setup-list">
+            <h3>Quick setup</h3>
+            <ol>
+              <li>Install ESP32 board support in Arduino IDE.</li>
+              <li>Add ArduinoJson, Adafruit GFX, and Adafruit ST7789.</li>
+              <li>Set <code>STATION</code>, <code>ssid</code>, and <code>password</code>.</li>
+              <li>Choose <code>TRANSPORTATION_TYPES</code> for train, tram, ship, bus, or cableway.</li>
+              <li>Adjust destination and line filters for the departures you want.</li>
+              <li>Flash the sketch and power the board through USB-C.</li>
+            </ol>
+          </div>
+          <div class="tech-tags" aria-label="Technologies used">
+            <span>ESP32</span>
+            <span>ST7789</span>
+            <span>ArduinoJson</span>
+            <span>Adafruit GFX</span>
+            <span>Transport API</span>
+            <span>Task WDT</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Swiss Transit Tracker</span>
+      <a href="https://github.com/HerRei/Sbb_Tracker_Sissach" rel="noreferrer">GitHub repository</a>
+      <span>MIT License</span>
+    </footer>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+        }
+      }
+    </script>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
