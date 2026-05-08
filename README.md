@@ -1,6 +1,9 @@
 # ESP32 SBB Tracker
 
-**Project note:** This is the SBB Tracker hardware and firmware project; the GitHub Pages website in [`docs`](docs/) was generated with the help of Codex.
+**Project note:** The ESP32 firmware and project code were written by Hermès Reisner. The GitHub Pages showcase website in [`docs`](docs/) was written by Hermès Reisner with AI assistance from Codex.
+
+The showcase website is available at: [https://herrei.github.io/Sbb_Tracker_Sissach/](https://herrei.github.io/Sbb_Tracker_Sissach/)
+
 
 A hardened, robust departure display for Swiss public transport. This project uses an ESP32 and an ST7789 display to fetch real-time stationboard data from the [OpenData.ch Transport API](https://transport.opendata.ch/).
 
@@ -36,11 +39,6 @@ Install the following libraries via the Arduino Library Manager:
 2.  **Adafruit GFX Library**
 3.  **Adafruit ST7789 Library**
 
-## Website
-
-This repository includes a static GitHub Pages showcase site in the [`docs`](docs/) folder. To publish it, open the repository settings on GitHub, go to **Pages**, choose **Deploy from a branch**, and select the `main` branch with the `/docs` folder as the publishing source.
-
-GitHub documents this supported publishing source here: [Configuring a publishing source for your GitHub Pages site](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
 ## Configuration
 
