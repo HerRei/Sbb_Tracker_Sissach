@@ -4,6 +4,9 @@
 
 The showcase website is available at: [https://herrei.github.io/Sbb_Tracker_Sissach/](https://herrei.github.io/Sbb_Tracker_Sissach/)
 
+<p align="center">
+  <img src="docs/assets/board-closeup.jpg" alt="ESP32 SBB Tracker live hardware display" width="560" />
+</p>
 
 A hardened, robust departure display for Swiss public transport. This project uses an ESP32 and an ST7789 display to fetch real-time stationboard data from the [OpenData.ch Transport API](https://transport.opendata.ch/).
 
