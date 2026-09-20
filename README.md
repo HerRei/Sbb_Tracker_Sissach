@@ -1,6 +1,6 @@
 # ESP32 SBB Tracker
 
-**Project note:** The ESP32 firmware and project code were written by Hermès Reisner. The GitHub Pages showcase website in [`docs`](docs/) was written by Hermès Reisner with AI assistance from Codex.
+**Project note:** The ESP32 firmware and project code were written by Hermes Reisner. The GitHub Pages showcase website in [`docs`](docs/) was written by Hermes Reisner with AI assistance from Codex.
 
 The showcase website is available at: [https://herrei.github.io/Sbb_Tracker_Sissach/](https://herrei.github.io/Sbb_Tracker_Sissach/)
 
