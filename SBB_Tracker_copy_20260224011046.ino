@@ -1,6 +1,6 @@
 /*
    Project: SBB Train Display
-   Author: Hermès Reisner
+   Author: Hermes Reisner
    Date: 2024
    
    Notes:
