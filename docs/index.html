@@ -8,18 +8,37 @@
       content="Swiss Transit Tracker is an ESP32 public-transport departure board with configurable OpenData API modes, custom filters, RAM-aware JSON parsing, and watchdog recovery."
     />
     <title>Swiss Transit Tracker</title>
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=JetBrains+Mono:wght@400;600;700&display=swap"
+    />
+    <link rel="preload" href="./assets/esp32-c6-lcd-1.47.glb" as="fetch" type="model/gltf-binary" crossorigin />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="github-mark" viewBox="0 0 24 24">
+        <path d="M10.226 17.284c-2.965-.36-5.054-2.493-5.054-5.256 0-1.123.404-2.336 1.078-3.144-.292-.741-.247-2.314.09-2.965.898-.112 2.111.36 2.83 1.01.853-.269 1.752-.404 2.853-.404 1.1 0 1.999.135 2.807.382.696-.629 1.932-1.1 2.83-.988.315.606.36 2.179.067 2.942.72.854 1.101 2 1.101 3.167 0 2.763-2.089 4.852-5.098 5.234.763.494 1.28 1.572 1.28 2.807v2.336c0 .674.561 1.056 1.235.786 4.066-1.55 7.255-5.615 7.255-10.646C23.5 6.188 18.334 1 11.978 1 5.62 1 .5 6.188.5 12.545c0 4.986 3.167 9.12 7.435 10.669.606.225 1.19-.18 1.19-.786V20.63a2.9 2.9 0 0 1-1.078.224c-1.483 0-2.359-.808-2.987-2.313-.247-.607-.517-.966-1.034-1.033-.27-.023-.359-.135-.359-.27 0-.27.45-.471.898-.471.652 0 1.213.404 1.797 1.235.45.651.921.943 1.483.943.561 0 .92-.202 1.437-.719.382-.381.674-.718.944-.943" />
+      </symbol>
+    </svg>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
       <a class="brand" href="#overview" aria-label="Swiss Transit Tracker home">
         <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 64 44" focusable="false">
-            <path d="M8 22 24 8v9h16v10H24v9L8 22Z" />
-            <path d="M56 22 40 8v9H24v10h16v9l16-14Z" />
+          <!-- A tiny departure board: two trains on time, one late. -->
+          <svg viewBox="0 0 42 26" focusable="false">
+            <rect class="mark-time" x="0" y="2.5" width="12" height="3" rx="1.5" />
+            <rect class="mark-ok" x="16" y="0" width="26" height="8" rx="2" />
+            <rect class="mark-time" x="0" y="11.5" width="12" height="3" rx="1.5" />
+            <rect class="mark-ok" x="16" y="9" width="26" height="8" rx="2" />
+            <rect class="mark-time" x="0" y="20.5" width="12" height="3" rx="1.5" />
+            <rect class="mark-late" x="16" y="18" width="26" height="8" rx="2" />
+            <rect class="mark-delay" x="19" y="20.5" width="8" height="3" rx="1.5" />
           </svg>
         </span>
         <span>Swiss Transit Tracker</span>
@@ -29,14 +48,17 @@
         <a href="#data">Data</a>
         <a href="#reliability">Reliability</a>
         <a href="#hardware">Hardware</a>
-        <a class="nav-cta" href="https://github.com/HerRei/Sbb_Tracker_Sissach" rel="noreferrer">GitHub</a>
+        <a class="nav-cta" href="https://github.com/HerRei/Sbb_Tracker_Sissach" rel="noreferrer">
+          <svg class="gh-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#github-mark" /></svg>
+          GitHub
+        </a>
       </nav>
     </header>
 
     <main id="main">
       <section id="overview" class="hero section-pad">
         <div class="hero-copy">
-          <p class="eyebrow">ESP32 • Swiss public transport API • ST7789</p>
+          <p class="eyebrow">ESP32-C6 • Swiss public transport API • ST7789</p>
           <h1>Swiss Transit Tracker</h1>
           <p class="hero-lede">
             A configurable departure board for Swiss public transport. Pick a station or stop, choose API modes like train, tram,
@@ -44,7 +66,7 @@
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="https://github.com/HerRei/Sbb_Tracker_Sissach" rel="noreferrer">
-              <span class="button-icon" aria-hidden="true">↗</span>
+              <svg class="gh-mark button-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#github-mark" /></svg>
               View on GitHub
             </a>
             <a class="button button-secondary" href="#features">Explore features</a>
@@ -88,16 +110,16 @@
               <path d="M504 575 C506 523 508 477 508 412" />
             </svg>
             <div class="model-callout callout-esp32">
-              <span>ESP32 board</span>
-              <small>Wi‑Fi connected microcontroller</small>
+              <span>ESP32-C6</span>
+              <small>Wi‑Fi 6 microcontroller</small>
             </div>
             <div class="model-callout callout-usb">
               <span>USB-C power</span>
               <small>5V input for simple mounting</small>
             </div>
             <div class="model-callout callout-display">
-              <span>ST7789 display</span>
-              <small>Color rows for any selected mode</small>
+              <span>1.47″ ST7789</span>
+              <small>172 × 320 pixels over SPI</small>
             </div>
             <div class="model-callout callout-ui">
               <span>Departure UI</span>
@@ -119,7 +141,7 @@
       <section id="features" class="section-pad feature-band">
         <div class="section-heading">
           <p class="eyebrow">What it does</p>
-          <h2>A compact board built for reliable glanceable departures.</h2>
+          <h2>A compact board for departures you can read at a glance.</h2>
         </div>
         <div class="feature-grid">
           <article class="feature-card">
@@ -314,7 +336,7 @@ filter["stationboard"][0]["stop"]["delay"] = true;</code></pre>
             </ol>
           </div>
           <div class="tech-tags" aria-label="Technologies used">
-            <span>ESP32</span>
+            <span>ESP32-C6</span>
             <span>ST7789</span>
             <span>ArduinoJson</span>
             <span>Adafruit GFX</span>
@@ -327,7 +349,11 @@ filter["stationboard"][0]["stop"]["delay"] = true;</code></pre>
 
     <footer class="site-footer">
       <span>Swiss Transit Tracker</span>
-      <a href="https://github.com/HerRei/Sbb_Tracker_Sissach" rel="noreferrer">GitHub repository</a>
+      <a href="https://github.com/HerRei/Sbb_Tracker_Sissach" rel="noreferrer">
+        <svg class="gh-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#github-mark" /></svg>
+        GitHub repository
+      </a>
+      <a href="https://www.waveshare.com/wiki/ESP32-C6-LCD-1.47" rel="noreferrer">3D board model: Waveshare ESP32-C6-LCD-1.47</a>
       <span>MIT License</span>
     </footer>
 

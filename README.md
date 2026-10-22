@@ -8,6 +8,14 @@ The showcase website is available at: [https://herrei.github.io/Sbb_Tracker_Siss
   <img src="docs/assets/board-closeup.jpg" alt="ESP32 SBB Tracker live hardware display" width="560" />
 </p>
 
+<p align="center">
+  <a href="https://herrei.github.io/Sbb_Tracker_Sissach/">
+    <img src="docs/assets/board-turntable.gif" alt="3D model of the Waveshare ESP32-C6-LCD-1.47 board turning, with departures on its screen" width="640" />
+  </a>
+  <br />
+  <sub>3D model of the Waveshare ESP32-C6-LCD-1.47, made from Waveshare's CAD drawing. <a href="https://herrei.github.io/Sbb_Tracker_Sissach/">Open the interactive version</a>.</sub>
+</p>
+
 A hardened, robust departure display for Swiss public transport. This project uses an ESP32 and an ST7789 display to fetch real-time stationboard data from the [OpenData.ch Transport API](https://transport.opendata.ch/).
 
 ## Features
